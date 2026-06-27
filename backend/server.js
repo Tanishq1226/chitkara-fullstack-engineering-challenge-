@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
 });
 
 // Start Server
-app.listen(config.PORT, () => {
-  console.log(`Backend server running on port ${config.PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(config.PORT, () => {
+    console.log(`Backend server running on port ${config.PORT}`);
+  });
+}
+
+module.exports = app;
